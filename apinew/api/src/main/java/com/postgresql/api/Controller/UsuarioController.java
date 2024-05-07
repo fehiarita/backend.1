@@ -71,7 +71,7 @@ public class UsuarioController {
         // status 201
         Usuario usuarioSalvo = repository.save(usuario);
         // url cadastrarUsuario/usuario/{id}
-        return ResponseEntity.created(URI.create("/usuario/" + usuarioSalvo.getId())).body(usuarioSalvo);
+        return ResponseEntity.created(URI.create("/usuario")).body(usuarioSalvo);
     }
 
 
