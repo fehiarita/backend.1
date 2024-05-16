@@ -1,0 +1,4 @@
+com\postgresql\api\ApiApplication.class
+com\postgresql\api\Repository\UsuarioRepository.class
+com\postgresql\api\Model\Usuario.class
+com\postgresql\api\Controller\UsuarioController.class
