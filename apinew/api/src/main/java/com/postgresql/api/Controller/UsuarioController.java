@@ -74,7 +74,10 @@ public class UsuarioController {
         return ResponseEntity.created(URI.create("/usuario")).body(usuarioSalvo);
     }
 
+    public ResponseEntity<Usuario> loginUsuario(@RequestBody Usuario usuario){
+        return null;
 
+    }
     
     
     

@@ -24,6 +24,6 @@ public class Comentario {
     @Column(nullable = false, unique = true)
     private Usuario id_usuario;
 
-    @Column()
-    private LocalDate datahora;
+    @Column(nullable = false)
+    private LocalDate datahoraComentario;
 }
