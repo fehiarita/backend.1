@@ -8,7 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 // import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -26,12 +26,13 @@ public class Postagem {
     private String conteudo;
 
     @Column
-    private String imagemBase64;
+    private String imagemUrl;
 
-    @ManyToMany
+    @OneToMany
     @Column(nullable = false)
     private Usuario id_usuario;
 
+    @Column(nullable = false)
     private LocalDateTime dataHoraPostagem;
     // @ManyToOne
     // @Column(nullable = false)

@@ -9,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -26,23 +25,23 @@ public class Partida {
     private LocalDate datahora_partida;
 
     @ManyToOne
-    @JoinColumn(name = "jogador1_id",nullable = false)
-    private Usuario jogador1;
+    @JoinColumn(name = "id_jogador1",nullable = false)
+    private Usuario id_jogador1;
 
     @ManyToOne
-    @JoinColumn(name = "jogador2_id", nullable = false)
-    private Usuario jogador2;
+    @JoinColumn(name = "id_jogador2", nullable = false)
+    private Usuario id_jogador2;
 
     @ManyToOne
-    @JoinColumn(name = "ganhador_id", nullable = true)
-    private Usuario ganhador;
+    @JoinColumn(name = "id_ganhador", nullable = true)
+    private Usuario id_ganhador;
 
     @Column(nullable = true)
     private Integer score;
 
-    @OneToMany
-    @Column(nullable = false)
-    private Clube clube;
+    @ManyToOne
+    @JoinColumn(name = "id_clube")
+    private Clube id_clube;
 
 
 
