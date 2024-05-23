@@ -34,54 +34,18 @@ public class PostagemController {
     @Autowired
     PostagemRepository repository;
 
+
     @PostMapping("/criarpostagem")
-    public ResponseEntity<Postagem> criarPostagem( @RequestParam MultipartFile imagem, @RequestBody Postagem postagem) throws IOException {
+    public ResponseEntity<Postagem> criarPostagem( @RequestParam(required = false) MultipartFile imagem, @RequestBody Postagem postagem) throws IOException {
 
-        byte[] imagemCompactada = null;
-        if (imagem != null) {
-            imagemCompactada = 
-        }
-        // private boolean uploadImagemLocal(String imagemUrl) throws IOException{
-        //     // validar a imagem
-        //     try{
-        //         new URL(imagemUrl).openStream();
-        //     }catch (IOException | MalformedURLException e){
-        //         System.err.println("Erro ao validar URL da imagem: " + e.getMessage());
-        //         return false;
-        //     }
-
-        //     // baixar a imagem 
-        //     try(InputStream inputStream = new URL(imagemUrl).openStream()){
-        //         byte[] imagemBytes = IOUtils.toByteArray(inputStream);
-
-        //         String nomeArquivo = UUID.randomUUID().toString() + "jpg";
-
-        //         Path diretorioDestino = Paths.get("C:\Users\pc\Documents\imagemAPI/");
-        //         Files.createDirectories(diretorioDestino);
-
-        //         Files.write(diretorioDestino.resolve(nomeArquivo), imagemBytes);
-
-        //         imagemUrl = "/" + diretorioDestino.relativize(Paths,get(diretorioDestino.toString(),nomeArquivo)).toString();
-        //         System.out.println("Imagem '" + nomeArquivo + "' salva com sucesso!");
-        //         } catch (Exception e) {
-        //         // TODO: handle exception
-        //     }
-        // }
-
-        // boolean imagemSalvaComSucesso = uploadImagemLocal(postagem.getImagemUrl());
-        // if (imagemSalvaComSucesso) {
-        //     postagem.setImagemUrl(imagemUrl);
-        //     postagemRepository.save(postagem);
-        //     return ResponseEntity.ok().build();
-        // } else {
-        //     return ResponseEntity.badRequest().build();
-        // }
-        
-
+        // validar conteudo da postagem
         if (postagem.getConteudo() == null || postagem.getConteudo().isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
-        postagem.setDataHoraPostagem(LocalDateTime.now());
+        
+        if (imagem != null && !imagem.isEmpty()) {
+            String imagem = 
+        }
 
         Postagem postagemSalva = repository.save(postagem);
         return ResponseEntity.ok(postagemSalva);
