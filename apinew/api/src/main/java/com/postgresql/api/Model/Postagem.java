@@ -25,7 +25,7 @@ public class Postagem {
     @Column(nullable = false)
     private String conteudo;
 
-    @Column
+    @Column(nullable = true)
     private String imagemUrl;
 
     @OneToMany
