@@ -11,7 +11,7 @@ import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 // import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -35,7 +35,7 @@ public class UsuarioController {
     public ResponseEntity<Usuario> cadastrarUsuario(@RequestBody Usuario usuario) {
 
         if (usuario.getNome() == null || usuario.getNome().isEmpty()) {
-            // cria e retorna o status 400 bad request
+            
             return ResponseEntity.badRequest().build();
         }
         
@@ -44,10 +44,6 @@ public class UsuarioController {
         }
         
         if (usuario.getEmail() == null || usuario.getEmail().isEmpty()) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        if (usuario.getSenha() == null || usuario.getSenha().isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
 
@@ -64,17 +60,32 @@ public class UsuarioController {
         }
 
         // criptografia de senha
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String senhaCriptografada = encoder.encode(usuario.getSenha());
-        usuario.setSenha(senhaCriptografada);
+        // BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        // String senhaCriptografada = encoder.encode(usuario.getSenha());
+        // usuario.setSenha(senhaCriptografada);
 
         // status 201
         Usuario usuarioSalvo = repository.save(usuario);
         // url cadastrarUsuario/usuario/{id}
-        return ResponseEntity.created(URI.create("/usuario/" + usuarioSalvo.getId())).body(usuarioSalvo);
+        return ResponseEntity.created(URI.create("/usuario")).body(usuarioSalvo);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<Usuario> loginUsuario(@RequestBody Usuario usuario){
 
+        Usuario usuarioEncontrado = repository.findByEmailAndSenha(usuario.getEmail(),usuario.getSenha());
+
+        if (usuarioEncontrado != null) {
+            // status 200
+            ResponseEntity.ok(usuarioEncontrado);
+        }else{
+            // status 404
+            ResponseEntity.notFound().build();
+        }
+
+        return null;
+
+    }
     
     
     
