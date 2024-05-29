@@ -40,8 +40,8 @@ public class Partida {
     private Integer score;
 
     @ManyToOne
-    @JoinColumn(name = "id_clube")
-    private Clube id_clube;
+    @JoinColumn(name = "clube_id")
+    private Clube clube;
 
 
 
